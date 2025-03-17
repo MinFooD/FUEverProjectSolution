@@ -1,11 +1,18 @@
+using DataAccessLayer.Context;
+using DataAccessLayer.Entities;
+using FueverProject.Extensions;
+using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.AddPresentationLayer();
+//builder.Services.AddBusinessLogicLayer();
+//builder.Services.AddDataAccessLayer(builder.Configuration);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
+	.AddEntityFrameworkStores<FueverDbContext>()
+	.AddDefaultTokenProviders();
 
 var app = builder.Build();
 
