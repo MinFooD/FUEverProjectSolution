@@ -1,6 +1,6 @@
 ﻿using BusinessLogicLayer.ServiceContracts;
 using DataAccessLayer.Entities;
-using DataAccessLayer.Entities.Enum;
+using DataAccessLayer.Entities.EntityEnums;
 using FUEverProject.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

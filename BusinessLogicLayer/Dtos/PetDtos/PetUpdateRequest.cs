@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.Dtos.PetDtos;
 
-public class PetResponse
+public class PetUpdateRequest
 {
     public Guid PetID { get; set; }
     public string PetName { get; set; } = default!;
@@ -11,12 +11,10 @@ public class PetResponse
     public string? SpecialPathology { get; set; }
     public decimal Weight { get; set; }
     public string? Diet { get; set; }
-    public string Gender { get; set; } = default!;
+    public bool Gender { get; set; }
     public string? Habit { get; set; }
     public string? OtherRequest { get; set; }
     public string? HealthDetail { get; set; }
     public string? Image { get; set; }
     public Guid PetOwnerID { get; set; }
-    public string? PetOwnerName { get; set; } 
-    public int BookingCount { get; set; }
 }

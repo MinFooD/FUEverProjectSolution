@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Entities;
+using System.Linq.Expressions;
 
 namespace DataAccessLayer.RepositoryContracts;
 
@@ -14,9 +15,23 @@ public interface IPetsRepository
     Task<IEnumerable<Pet>> GetPets();
 
     /// <summary>
+    /// Retrieves a single pet based on the specified condition asynchronously.
+    /// </summary>
+    /// <param name="conditionExpression">The condition to filter the pet</param>
+    /// <returns>Returns a single pet or null if not found\</returns>
+    Task<Pet?> GetPetByCondition(Expression<Func<Pet, bool>> conditionExpression);
+
+    /// <summary>
     /// Adds a new pet into the pets table asynchronously.
     /// </summary>
     /// <param name="pet">The pet to be added</param>
     /// <returns>Returns the added pet object or null if unsuccessful</returns>
     Task<Pet?> AddPet(Pet pet);
+
+    /// <summary>
+    /// Updates an existing pet asynchronously.
+    /// </summary>
+    /// <param name="pet">The pet to be updated</param>
+    /// <returns>Returns the updated pet or null if not found</returns>
+    Task<Pet?> UpdatePet(Pet pet);
 }
