@@ -23,4 +23,11 @@ public interface IPetsService
     /// <param name="petUpdateRequest">Pet data to update</param>
     /// <returns>Returns pet object after successful updation; otherwise null</returns>
     Task<PetResponse?> UpdatePet(PetUpdateRequest petUpdateRequest);
+
+    /// <summary>
+    /// Deletes an exsting pet based on given pet ID
+    /// </summary>
+    /// <param name="petID">PetID to search and delete</param>
+    /// <returns>Returns true if the deletion is successful; otherwise false</returns>
+    Task<bool> DeletePet(Guid petID);
 }

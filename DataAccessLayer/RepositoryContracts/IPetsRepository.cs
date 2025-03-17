@@ -34,4 +34,11 @@ public interface IPetsRepository
     /// <param name="pet">The pet to be updated</param>
     /// <returns>Returns the updated pet or null if not found</returns>
     Task<Pet?> UpdatePet(Pet pet);
+
+    /// <summary>
+    /// Deletes the pet asynchronously.
+    /// </summary>
+    /// <param name="petID">The pet ID to be deleted</param>
+    /// <returns>Returns true if the deletion is successful, false otherwise.</returns>
+    Task<bool> DeletePet(Guid petID);
 }
