@@ -16,4 +16,11 @@ public class PetsRepository(FueverDbContext dbContext) : IPetsRepository
             .Include(p => p.Bookings)
             .ToListAsync();
     }
+
+    public async Task<Pet?> AddPet(Pet pet)
+    {
+        _dbContext.Pets.Add(pet);
+        await _dbContext.SaveChangesAsync();
+        return pet;
+    }
 }

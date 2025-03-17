@@ -9,4 +9,11 @@ public interface IPetsService
     /// </summary>
     /// <returns>Returns list of PetResponse objects</returns>
     Task<IEnumerable<PetResponse?>> GetPets();
+
+    /// <summary>
+    /// Adds (inserts) pet into the table using pets repository
+    /// </summary>
+    /// <param name="petAddRequest">Pet to insert</param>
+    /// <returns>Pet after inserting or null if unsuccessful</returns>
+    Task<PetResponse?> AddPet(PetAddRequest petAddRequest);
 }

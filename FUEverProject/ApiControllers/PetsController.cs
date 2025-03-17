@@ -17,4 +17,24 @@ public class PetsController(IPetsService petsService) : ControllerBase
         IEnumerable<PetResponse?> pets = await _petsService.GetPets();
         return pets;
     }
+
+    //POST api/Pets
+    [HttpPost]
+    public async Task<IActionResult> Post(PetAddRequest petAddRequest)
+    {
+        if (petAddRequest == null)
+        {
+            return BadRequest("Invalid order data");
+        }
+
+        PetResponse? petResponse = await _petsService.AddPet(petAddRequest);
+
+        if (petResponse == null)
+        {
+            return Problem("Error in adding pet");
+        }
+
+
+        return Created($"api/Pets/search/petid/{petResponse?.PetID}", petResponse);
+    }
 }
