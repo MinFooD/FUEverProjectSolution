@@ -24,7 +24,7 @@ public class PetsController(IPetsService petsService) : ControllerBase
     {
         if (petAddRequest == null)
         {
-            return BadRequest("Invalid order data");
+            return BadRequest("Invalid pet data");
         }
 
         PetResponse? petResponse = await _petsService.AddPet(petAddRequest);
@@ -34,7 +34,27 @@ public class PetsController(IPetsService petsService) : ControllerBase
             return Problem("Error in adding pet");
         }
 
-
         return Created($"api/Pets/search/petid/{petResponse?.PetID}", petResponse);
+    }
+
+    //PUT api/Pets/{petID}
+    [HttpPut("{petID}")]
+    public async Task<IActionResult> Put(Guid petID, PetUpdateRequest petUpdateRequest)
+    {
+        if (petUpdateRequest == null)
+        {
+            return BadRequest("Invalid pet data");
+        }
+
+        petUpdateRequest.PetID = petID;
+
+        PetResponse? petResponse = await _petsService.UpdatePet(petUpdateRequest);
+
+        if (petResponse == null)
+        {
+            return Problem("Error in updating pet");
+        }
+
+        return Ok(petResponse);
     }
 }

@@ -16,4 +16,11 @@ public interface IPetsService
     /// <param name="petAddRequest">Pet to insert</param>
     /// <returns>Pet after inserting or null if unsuccessful</returns>
     Task<PetResponse?> AddPet(PetAddRequest petAddRequest);
+
+    /// <summary>
+    /// Updates the exsting pet based on the PetID
+    /// </summary>
+    /// <param name="petUpdateRequest">Pet data to update</param>
+    /// <returns>Returns pet object after successful updation; otherwise null</returns>
+    Task<PetResponse?> UpdatePet(PetUpdateRequest petUpdateRequest);
 }
