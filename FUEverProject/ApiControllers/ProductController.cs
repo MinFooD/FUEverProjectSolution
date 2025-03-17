@@ -27,11 +27,34 @@ namespace FueverProject.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "StoreOwner")]
+        [Authorize(Roles = "StoreOwner")]
         public async Task<IActionResult> Create([FromBody] AddProductRequestDTO addProductRequestDTO)
         {
             var product = await _productService.CreateAsync(addProductRequestDTO);
 			return Ok(product);
         }
-    }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        [Authorize(Roles = "StoreOwner")]
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateProductRequestDTO updateProductRequestDTO)
+        {
+            var product = await _productService.UpdateAsync(id, updateProductRequestDTO);
+			return Ok(product);
+		}
+
+		[HttpDelete]
+		[Route("{id:Guid}")]
+		[Authorize(Roles = "StoreOwner")]
+		public async Task<IActionResult> Delete([FromRoute] Guid id)
+		{
+			var deleteProductDomainModel = await _productService.DeleteAsync(id);
+			if (deleteProductDomainModel == null)
+			{
+				return NotFound();
+			}
+			return Ok(deleteProductDomainModel);
+
+		}
+	}
 }
