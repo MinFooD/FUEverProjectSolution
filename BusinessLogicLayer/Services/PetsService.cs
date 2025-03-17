@@ -36,6 +36,17 @@ public class PetsService(IPetsRepository petsRepository, IApplicationUsersReposi
         return addedPetResponse;
     }
 
+    public async Task<bool> DeletePet(Guid petID)
+    {
+        Pet? existingPet = await _petsRepository.GetPetByCondition(temp => temp.PetID == petID);
+
+        if (existingPet == null)
+            return false;
+
+        bool isDeleted = await _petsRepository.DeletePet(petID);
+        return isDeleted;
+    }
+
     public async Task<IEnumerable<PetResponse?>> GetPets()
     {
         IEnumerable<Pet?> pets = await _petsRepository.GetPets();

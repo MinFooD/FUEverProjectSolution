@@ -57,4 +57,19 @@ public class PetsController(IPetsService petsService) : ControllerBase
 
         return Ok(petResponse);
     }
+
+    //DELETE api/Pets/{petID}
+    [HttpDelete("{petID}")]
+    public async Task<IActionResult> Delete(Guid petID)
+    {
+        if (petID == Guid.Empty)
+            return BadRequest("Invalid order ID");
+
+        bool isDeleted = await _petsService.DeletePet(petID);
+
+        if (!isDeleted)
+            return Problem("Error in deleting pet");
+
+        return Ok(isDeleted);
+    }
 }

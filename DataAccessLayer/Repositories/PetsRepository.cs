@@ -53,4 +53,17 @@ public class PetsRepository(FueverDbContext dbContext) : IPetsRepository
 
         return existingPet;
     }
+
+    public async Task<bool> DeletePet(Guid petID)
+    {
+        Pet? exsitingPet = await _dbContext.Pets.FirstOrDefaultAsync(temp => temp.PetID == petID);
+
+        if (exsitingPet == null)
+            return false;
+
+        _dbContext.Pets.Remove(exsitingPet);
+        int affectedRowsCount = await _dbContext.SaveChangesAsync();
+
+        return affectedRowsCount > 0;
+    }
 }
