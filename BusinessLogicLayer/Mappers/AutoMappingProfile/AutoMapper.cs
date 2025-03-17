@@ -14,6 +14,7 @@ public class AutoMapper : Profile
 		   .ForMember(dest => dest.CategoryDtos, opt => opt.MapFrom(src => src.Category)).ReverseMap();
 
 		CreateMap<AddProductRequestDTO, Product>().ReverseMap();
+		CreateMap<UpdateProductRequestDTO, Product>().ReverseMap();
 		CreateMap<StoreDTO, Store>().ReverseMap();
         CreateMap<CategoryDTO, Category>().ReverseMap();
     }

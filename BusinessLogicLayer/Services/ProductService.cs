@@ -22,7 +22,12 @@ namespace BusinessLogicLayer.Services
 			var product = _mapper.Map<Product>(addProductRequestDTO);
             product = await _productRepository.CreateAsync(product);
             return _mapper.Map<AddProductRequestDTO>(product);
+		}
 
+		public async Task<ProductDTO?> DeleteAsync(Guid id)
+		{
+			var product = await _productRepository.DeleteAsync(id);
+			return _mapper.Map<ProductDTO>(product);
 		}
 
 		public async Task<List<ProductDTO>> GetAllProductAsync(Guid? storeId)
@@ -31,5 +36,12 @@ namespace BusinessLogicLayer.Services
             var productsDTO = _mapper.Map<List<ProductDTO>>(products);
             return productsDTO;
         }
-    }
+
+		public async Task<UpdateProductRequestDTO> UpdateAsync(Guid id, UpdateProductRequestDTO updateProductRequestDTO)
+		{
+			var product = _mapper.Map<Product>(updateProductRequestDTO);
+			product = await _productRepository.UpdateAsync(id, product);
+			return _mapper.Map<UpdateProductRequestDTO>(product);
+		}
+	}
 }
