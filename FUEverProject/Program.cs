@@ -4,6 +4,7 @@ using DataAccessLayer.Extensions;
 using BusinessLogicLayer.Extensions;
 using FueverProject.Extensions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,9 @@ builder.Services.AddDataAccessLayer(builder.Configuration);
 builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
 	.AddEntityFrameworkStores<FueverDbContext>()
 	.AddDefaultTokenProviders();
+
+builder.Services.AddDbContext<FueverDbContext>(option =>
+option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

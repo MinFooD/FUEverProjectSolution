@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogicLayer.ServiceContracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FueverProject.Controllers
@@ -21,5 +22,6 @@ namespace FueverProject.Controllers
             var products = await _productService.GetAllProductAsync(storeId);
             return Ok(products);
         }
-    }
+
+	}
 }
