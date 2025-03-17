@@ -12,4 +12,11 @@ public interface IPetsRepository
     /// </summary>
     /// <returns>Returns all pets from the table</returns>
     Task<IEnumerable<Pet>> GetPets();
+
+    /// <summary>
+    /// Adds a new pet into the pets table asynchronously.
+    /// </summary>
+    /// <param name="pet">The pet to be added</param>
+    /// <returns>Returns the added pet object or null if unsuccessful</returns>
+    Task<Pet?> AddPet(Pet pet);
 }
