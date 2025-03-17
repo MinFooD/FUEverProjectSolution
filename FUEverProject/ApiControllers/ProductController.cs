@@ -19,6 +19,7 @@ namespace FueverProject.Controllers
             _mapper = mapper;
         }
         [HttpGet]
+        //[Authorize(Roles = "PetOwner")]
         public async Task<IActionResult> GetAllProduct(Guid? storeId)
         {
             var products = await _productService.GetAllProductAsync(storeId);
@@ -26,7 +27,7 @@ namespace FueverProject.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "StoreOwner")]
+        //[Authorize(Roles = "StoreOwner")]
         public async Task<IActionResult> Create([FromBody] AddProductRequestDTO addProductRequestDTO)
         {
             var product = await _productService.CreateAsync(addProductRequestDTO);

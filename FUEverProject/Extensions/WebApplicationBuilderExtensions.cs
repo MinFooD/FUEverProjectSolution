@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using DataAccessLayer.Context;
+using DataAccessLayer.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -39,6 +42,13 @@ public static class WebApplicationBuilderExtensions
 		}
 	});
 		});
+
+		builder.Services.AddIdentityCore<ApplicationUser>()
+	.AddRoles<IdentityRole<Guid>>()
+	.AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>("Fuever")
+	.AddEntityFrameworkStores<FueverDbContext>()
+	.AddDefaultTokenProviders();
+
 		builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(option =>
 	option.TokenValidationParameters = new TokenValidationParameters
@@ -52,6 +62,7 @@ public static class WebApplicationBuilderExtensions
 		IssuerSigningKey = new SymmetricSecurityKey(
 			Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"]))
 	});
+		
 		builder.Services.AddEndpointsApiExplorer();
     }
 }

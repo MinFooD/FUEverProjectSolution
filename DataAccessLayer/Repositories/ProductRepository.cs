@@ -23,7 +23,7 @@ namespace DataAccessLayer.Repository
 
 		public async Task<List<Product>> GetAllProductAsync(Guid? storeId)
         {
-            var products = _context.Products.AsQueryable();
+            var products = _context.Products.Include("Category").AsQueryable();
             if (storeId != null)
             {
                 products = products.Where(p => p.StoreID == storeId);
