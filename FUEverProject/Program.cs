@@ -18,8 +18,8 @@ builder.Services.AddDataAccessLayer(builder.Configuration);
 //	.AddEntityFrameworkStores<FueverDbContext>()
 //	.AddDefaultTokenProviders();
 
-builder.Services.AddDbContext<FueverDbContext>(option =>
-option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//builder.Services.AddDbContext<FueverDbContext>(option =>
+//option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

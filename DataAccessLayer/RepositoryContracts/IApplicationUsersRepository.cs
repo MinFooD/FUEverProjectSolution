@@ -2,7 +2,7 @@
 
 namespace DataAccessLayer.RepositoryContracts;
 
-public interface IApplicationUsers
+public interface IApplicationUsersRepository
 {
     Task<ApplicationUser?> GetPetOwnerByIdAsync(Guid id);
 }
