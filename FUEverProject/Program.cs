@@ -23,6 +23,8 @@ option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection
 
 var app = builder.Build();
 
+app.UseCors("AllowSpecificOrigins");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -32,6 +34,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

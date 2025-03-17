@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using BusinessLogicLayer.Dtos.ProductDtos;
 using BusinessLogicLayer.ServiceContracts;
+using FUEverProject.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,5 +25,12 @@ namespace FueverProject.Controllers
             return Ok(products);
         }
 
-	}
+        [HttpPost]
+        [Authorize(Roles = "StoreOwner")]
+        public async Task<IActionResult> Create([FromBody] AddProductRequestDTO addProductRequestDTO)
+        {
+            var product = await _productService.CreateAsync(addProductRequestDTO);
+			return Ok(product);
+        }
+    }
 }
