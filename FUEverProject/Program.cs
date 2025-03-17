@@ -14,9 +14,9 @@ builder.AddPresentationLayer();
 builder.Services.AddBusinessLogicLayer();
 builder.Services.AddDataAccessLayer(builder.Configuration);
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
-	.AddEntityFrameworkStores<FueverDbContext>()
-	.AddDefaultTokenProviders();
+//builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>()
+//	.AddEntityFrameworkStores<FueverDbContext>()
+//	.AddDefaultTokenProviders();
 
 builder.Services.AddDbContext<FueverDbContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

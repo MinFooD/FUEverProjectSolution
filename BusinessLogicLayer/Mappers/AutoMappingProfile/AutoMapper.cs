@@ -10,7 +10,9 @@ public class AutoMapper : Profile
 {
     public AutoMapper()
     {
-        CreateMap<ProductDTO, Product>().ReverseMap();
+		CreateMap<Product, ProductDTO>()
+		   .ForMember(dest => dest.CategoryDtos, opt => opt.MapFrom(src => src.Category)).ReverseMap();
+
 		CreateMap<AddProductRequestDTO, Product>().ReverseMap();
 		CreateMap<StoreDTO, Store>().ReverseMap();
         CreateMap<CategoryDTO, Category>().ReverseMap();
