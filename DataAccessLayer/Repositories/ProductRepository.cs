@@ -14,7 +14,14 @@ namespace DataAccessLayer.Repository
             _context = context;
         }
 
-        public async Task<List<Product>> GetAllProductAsync(Guid? storeId)
+		public async Task<Product> CreateAsync(Product product)
+		{
+			await _context.Products.AddAsync(product);
+			await _context.SaveChangesAsync();
+			return product;
+		}
+
+		public async Task<List<Product>> GetAllProductAsync(Guid? storeId)
         {
             var products = _context.Products.AsQueryable();
             if (storeId != null)
