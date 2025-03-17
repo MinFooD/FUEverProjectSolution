@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLogicLayer.Dtos.ProductDtos;
 using BusinessLogicLayer.ServiceContracts;
+using DataAccessLayer.Entities;
 using DataAccessLayer.RepositoryContracts;
 
 namespace BusinessLogicLayer.Services
@@ -16,7 +17,15 @@ namespace BusinessLogicLayer.Services
             _mapper = mapper;
         }
 
-        public async Task<List<ProductDTO>> GetAllProductAsync(Guid? storeId)
+		public async Task<AddProductRequestDTO> CreateAsync(AddProductRequestDTO addProductRequestDTO)
+		{
+			var product = _mapper.Map<Product>(addProductRequestDTO);
+            product = await _productRepository.CreateAsync(product);
+            return _mapper.Map<AddProductRequestDTO>(product);
+
+		}
+
+		public async Task<List<ProductDTO>> GetAllProductAsync(Guid? storeId)
         {
             var products = await _productRepository.GetAllProductAsync(storeId);
             var productsDTO = _mapper.Map<List<ProductDTO>>(products);

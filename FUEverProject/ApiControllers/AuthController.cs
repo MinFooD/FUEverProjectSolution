@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Entities;
+﻿using BusinessLogicLayer.ServiceContracts;
+using DataAccessLayer.Entities;
 using DataAccessLayer.Entities.Enum;
 using FUEverProject.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -11,14 +12,15 @@ namespace FueverProject.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ITokenService _tokenService;
 
-        public AuthController(UserManager<ApplicationUser> userManager)
-        {
-            _userManager = userManager;
-        }
+		public AuthController(UserManager<ApplicationUser> userManager, ITokenService tokenService)
+		{
+			_userManager = userManager;
+			_tokenService = tokenService;
+		}
 
-
-        [HttpPost]
+		[HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestViewModel loginRequestViewModel)
         {
@@ -30,9 +32,15 @@ namespace FueverProject.Controllers
 
                 if (checkPasswordResult)
                 {
-                    var roles = await _userManager.GetRolesAsync(user);
-                    return Ok(user);
-                }
+					var roles = await _userManager.GetRolesAsync(user);
+					var jwtToken = _tokenService.CreateJWTToken(user, roles.ToList());
+					// Tạo object response chứa cả thông tin user và roles
+					var response = new LoginRespondeViewModel
+					{
+						JwtToken = jwtToken,
+					};
+					return Ok(response);
+				}
             }
             return BadRequest("Username or password incorrect");
         }
