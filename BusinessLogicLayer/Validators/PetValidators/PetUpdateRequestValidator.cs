@@ -1,13 +1,13 @@
 ﻿using BusinessLogicLayer.Dtos.PetDtos;
 using FluentValidation;
 
-namespace BusinessLogicLayer.Validators;
+namespace BusinessLogicLayer.Validators.PetValidators;
 
-public class PetAddRequestValidator : AbstractValidator<PetAddRequest>
+public class PetUpdateRequestValidator : AbstractValidator<PetUpdateRequest>
 {
-    public PetAddRequestValidator()
+    public PetUpdateRequestValidator()
     {
-        RuleFor(x => x.PetName)           
+        RuleFor(x => x.PetName)
             .NotEmpty().WithMessage("Tên thú cưng không được để trống.")
             .MaximumLength(50).WithMessage("Tên thú cưng không được vượt quá 50 ký tự.");
 

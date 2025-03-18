@@ -8,9 +8,9 @@ public class Pet
 {
     public Guid PetID { get; set; }
 
-    public string PetName { get; set; } = default!;
+    public string PetName { get; set; } = string.Empty;
 
-    public string Breed { get; set; } = default!;
+    public string Breed { get; set; } = string.Empty;
 
     public int Age { get; set; }
 

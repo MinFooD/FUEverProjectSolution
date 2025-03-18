@@ -1,9 +1,7 @@
-﻿using DataAccessLayer.Context;
-using DataAccessLayer.Entities;
+﻿using BusinessLogicLayer.Extensions;
+using DataAccessLayer.Context;
 using DataAccessLayer.Extensions;
-using BusinessLogicLayer.Extensions;
 using FueverProject.Extensions;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
