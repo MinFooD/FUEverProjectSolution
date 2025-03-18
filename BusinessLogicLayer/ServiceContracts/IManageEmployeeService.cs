@@ -13,6 +13,7 @@ namespace BusinessLogicLayer.ServiceContracts
 		Task<List<UserDtos>> GetUsersByRolesAsync(Guid storeId,List<string> roles);
 
 		Task<int> GetRoleFromUser(ApplicationUser user);
+		Task<UserDtoWithoutRole?> UpdateEmployeeStatus(Guid userId, int status);
 
 	}
 }

@@ -25,6 +25,10 @@ namespace FueverProject.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequestViewModel loginRequestViewModel)
         {
             var user = await _userManager.FindByEmailAsync(loginRequestViewModel.UserName);
+            if(user.Status != "active")
+            {
+				return BadRequest("User is not active");
+			}
 
             if (user != null)
             {
@@ -34,6 +38,7 @@ namespace FueverProject.Controllers
                 {
 					var roles = await _userManager.GetRolesAsync(user);
 					var jwtToken = _tokenService.CreateJWTToken(user, roles.ToList());
+
 					// Tạo object response chứa cả thông tin user và roles
 					var response = new LoginRespondeViewModel
 					{
@@ -84,5 +89,5 @@ namespace FueverProject.Controllers
             }
             return BadRequest("Something went wrong!");
         }
-    }
+	}
 }

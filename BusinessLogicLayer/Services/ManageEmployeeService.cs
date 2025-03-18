@@ -50,5 +50,12 @@ namespace BusinessLogicLayer.Services
 				return 2;
 			return 0;
 		}
+
+		public async Task<UserDtoWithoutRole?> UpdateEmployeeStatus(Guid userId, int status)
+		{
+			var user = await _manageEmployeeRepository.UpdateStatusEmployee(userId, status);
+			var userDto = _mapper.Map<UserDtoWithoutRole>(user);
+			return userDto;
+		}
 	}
 }
