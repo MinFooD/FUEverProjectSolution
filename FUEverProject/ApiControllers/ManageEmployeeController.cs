@@ -59,7 +59,7 @@ namespace FUEverProject.ApiControllers
 				DateOfBirth = registerRequestViewModel.DateOfBirth,
 				PhoneNumber = registerRequestViewModel.Phone,
 				UserName = registerRequestViewModel.UserName,
-				ProfileImage = "default.jpg",
+				ProfileImage = registerRequestViewModel.Image,
 				Email = registerRequestViewModel.Gmail,
 				StoreId = storeId
 			};
