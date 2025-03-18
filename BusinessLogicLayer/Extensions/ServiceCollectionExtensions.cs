@@ -20,5 +20,6 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<IStoreService, StoreService>();   
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IManageEmployeeService, ManageEmployeeService>();
 	}
 }

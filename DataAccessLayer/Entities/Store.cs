@@ -41,8 +41,7 @@ namespace DataAccessLayer.Entities
 
         [ForeignKey("OwnerID")]
         public virtual ApplicationUser Owner { get; set; }
-
-        public virtual ICollection<Product> Products { get; set; }
+		public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Service> Services { get; set; }
         public virtual ICollection<Promotion> Promotions { get; set; }
         public virtual ICollection<Booking> Bookings { get; set; }
