@@ -55,8 +55,13 @@ namespace FUEverProject.ApiControllers
         public async Task<IActionResult> Register([FromBody] RegisterRequestViewModel registerRequestViewModel)
         {
             string[] roles;
+            var user = await _userManager.FindByEmailAsync(registerRequestViewModel.Gmail);
+			if (user != null)
+			{
+				return BadRequest("Email already exists");
+			}
 
-            if (registerRequestViewModel.Roles == 2)
+			if (registerRequestViewModel.Roles == 2)
             {
                 roles = new string[] { "StoreOwner" };
             }
