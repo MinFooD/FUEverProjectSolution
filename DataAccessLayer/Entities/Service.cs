@@ -22,11 +22,9 @@ namespace DataAccessLayer.Entities
 
         public bool Type { get; set; }
 
-        public TimeSpan LastAvailableStartTime { get; set; }
+        public TimeSpan? Duration { get; set; }
 
-        public TimeSpan Duration { get; set; }
-
-        public TimeSpan MinDuration { get; set; }
+        public TimeSpan? MinDuration { get; set; }
 
         public Guid StoreID { get; set; }
 

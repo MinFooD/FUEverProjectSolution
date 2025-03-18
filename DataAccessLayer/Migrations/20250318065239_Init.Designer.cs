@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(FueverDbContext))]
-    [Migration("20250318004314_Init")]
+    [Migration("20250318065239_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -764,13 +764,10 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<TimeSpan>("Duration")
+                    b.Property<TimeSpan?>("Duration")
                         .HasColumnType("time");
 
-                    b.Property<TimeSpan>("LastAvailableStartTime")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("MinDuration")
+                    b.Property<TimeSpan?>("MinDuration")
                         .HasColumnType("time");
 
                     b.Property<decimal>("Price")

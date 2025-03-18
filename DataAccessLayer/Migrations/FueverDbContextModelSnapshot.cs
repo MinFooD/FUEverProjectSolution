@@ -761,13 +761,10 @@ namespace DataAccessLayer.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<TimeSpan>("Duration")
+                    b.Property<TimeSpan?>("Duration")
                         .HasColumnType("time");
 
-                    b.Property<TimeSpan>("LastAvailableStartTime")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("MinDuration")
+                    b.Property<TimeSpan?>("MinDuration")
                         .HasColumnType("time");
 
                     b.Property<decimal>("Price")

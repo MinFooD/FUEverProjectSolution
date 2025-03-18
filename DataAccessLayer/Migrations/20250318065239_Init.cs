@@ -420,9 +420,8 @@ namespace DataAccessLayer.Migrations
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Type = table.Column<bool>(type: "bit", nullable: false),
-                    LastAvailableStartTime = table.Column<TimeSpan>(type: "time", nullable: false),
-                    Duration = table.Column<TimeSpan>(type: "time", nullable: false),
-                    MinDuration = table.Column<TimeSpan>(type: "time", nullable: false),
+                    Duration = table.Column<TimeSpan>(type: "time", nullable: true),
+                    MinDuration = table.Column<TimeSpan>(type: "time", nullable: true),
                     StoreID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
