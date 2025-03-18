@@ -75,7 +75,7 @@ namespace FUEverProject.ApiControllers
 					return Ok("Employee or Staff was registered!");
 				}
 			}
-			return BadRequest("Something went wrong!");
+			return BadRequest(identityResult.Errors);
 		}
 
 		[HttpPost]
