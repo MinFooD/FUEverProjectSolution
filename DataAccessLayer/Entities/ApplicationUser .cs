@@ -16,4 +16,5 @@ public class ApplicationUser : IdentityUser<Guid>
 
     [StringLength(20)]
     public string Status { get; set; } 
+    public Guid? StoreId { get; set; }
 }
