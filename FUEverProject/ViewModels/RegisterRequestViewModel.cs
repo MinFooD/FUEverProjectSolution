@@ -16,8 +16,9 @@ public class RegisterRequestViewModel
 
     [StringLength(10)]
     public string Phone { get; set; }
+    public string? Image { get; set; }
 
-    public DateTime DateOfBirth { get; set; }
+	public DateTime DateOfBirth { get; set; }
 
     [StringLength(255)]
     public string Address { get; set; }

@@ -42,7 +42,11 @@ namespace FUEverProject.ApiControllers
 		public async Task<IActionResult> RegisterEmployee([FromRoute] Guid storeId, [FromBody] RegisterRequestViewModel registerRequestViewModel)
 		{
 			string[] roles;
-
+			var user = await _userManager.FindByEmailAsync(registerRequestViewModel.Gmail);
+			if (user != null)
+			{
+				return BadRequest("Email already exists");
+			}
 			if (registerRequestViewModel.Roles == 1)
 			{
 				roles = new string[] { "Staff" };
@@ -59,7 +63,7 @@ namespace FUEverProject.ApiControllers
 				DateOfBirth = registerRequestViewModel.DateOfBirth,
 				PhoneNumber = registerRequestViewModel.Phone,
 				UserName = registerRequestViewModel.UserName,
-				ProfileImage = "default.jpg",
+				ProfileImage = registerRequestViewModel.Image,
 				Email = registerRequestViewModel.Gmail,
 				StoreId = storeId
 			};
@@ -75,7 +79,7 @@ namespace FUEverProject.ApiControllers
 					return Ok("Employee or Staff was registered!");
 				}
 			}
-			return BadRequest("Something went wrong!");
+			return BadRequest(identityResult.Errors);
 		}
 
 		[HttpPost]
