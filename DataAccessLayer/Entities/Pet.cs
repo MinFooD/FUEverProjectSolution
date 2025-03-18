@@ -6,7 +6,6 @@ namespace DataAccessLayer.Entities;
 
 public class Pet
 {
-    [Key]
     public Guid PetID { get; set; }
 
     public string PetName { get; set; } = default!;

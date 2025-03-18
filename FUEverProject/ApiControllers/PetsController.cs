@@ -44,6 +44,11 @@ public class PetsController(IPetsService petsService) : ControllerBase
 	//[Authorize(Roles = "PetOwner")]
 	public async Task<IActionResult> Put(Guid petID, PetUpdateRequest petUpdateRequest)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState); 
+        }
+
         if (petUpdateRequest == null)
         {
             return BadRequest("Invalid pet data");
