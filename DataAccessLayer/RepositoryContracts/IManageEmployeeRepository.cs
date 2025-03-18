@@ -11,5 +11,7 @@ namespace DataAccessLayer.RepositoryContracts
     public interface IManageEmployeeRepository
     {
 		Task<List<ApplicationUser>> GetUsersByRolesAsync(Guid storeId, List<string> roles);
+		Task<ApplicationUser?> UpdateStatusEmployee(Guid userId, int status);
+
 	}
 }

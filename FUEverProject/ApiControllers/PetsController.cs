@@ -1,5 +1,6 @@
 ﻿using BusinessLogicLayer.Dtos.PetDtos;
 using BusinessLogicLayer.ServiceContracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FueverProject.ApiControllers;
@@ -20,7 +21,8 @@ public class PetsController(IPetsService petsService) : ControllerBase
 
     //POST api/Pets
     [HttpPost]
-    public async Task<IActionResult> Post(PetAddRequest petAddRequest)
+	//[Authorize(Roles = "PetOwner")]
+	public async Task<IActionResult> Post(PetAddRequest petAddRequest)
     {
         if (petAddRequest == null)
         {
@@ -39,7 +41,8 @@ public class PetsController(IPetsService petsService) : ControllerBase
 
     //PUT api/Pets/{petID}
     [HttpPut("{petID}")]
-    public async Task<IActionResult> Put(Guid petID, PetUpdateRequest petUpdateRequest)
+	//[Authorize(Roles = "PetOwner")]
+	public async Task<IActionResult> Put(Guid petID, PetUpdateRequest petUpdateRequest)
     {
         if (petUpdateRequest == null)
         {
@@ -60,7 +63,8 @@ public class PetsController(IPetsService petsService) : ControllerBase
 
     //DELETE api/Pets/{petID}
     [HttpDelete("{petID}")]
-    public async Task<IActionResult> Delete(Guid petID)
+	//[Authorize(Roles = "PetOwner")]
+	public async Task<IActionResult> Delete(Guid petID)
     {
         if (petID == Guid.Empty)
             return BadRequest("Invalid order ID");

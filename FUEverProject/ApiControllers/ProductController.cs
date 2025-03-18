@@ -19,7 +19,6 @@ namespace FueverProject.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        //[Authorize(Roles = "PetOwner")]
         public async Task<IActionResult> GetAllProduct(Guid? storeId)
         {
             var products = await _productService.GetAllProductAsync(storeId);

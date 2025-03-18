@@ -20,6 +20,7 @@ public class AutoMapper : Profile
 		CreateMap<UpdateProductRequestDTO, Product>().ReverseMap();
 		CreateMap<StoreDTO, Store>().ReverseMap();
         CreateMap<CategoryDTO, Category>().ReverseMap();
-		CreateMap<ApplicationUser, UserDtos>().ReverseMap();
+		CreateMap<UserDtos, ApplicationUser>().ReverseMap();
+		CreateMap<UserDtoWithoutRole, ApplicationUser>().ReverseMap();
 	}
 }

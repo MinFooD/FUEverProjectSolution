@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Entities;
+using DataAccessLayer.Entities.EntityEnums;
 using DataAccessLayer.RepositoryContracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,7 @@ namespace DataAccessLayer.Repositories
 		}
 		public async Task<List<ApplicationUser>> GetUsersByRolesAsync(Guid storeId, List<string> roles)
 		{
-			var users = await _userManager.Users.ToListAsync();
+			var users = await _userManager.Users.Where(x => x.StoreId == storeId).ToListAsync();
 
 			var usersWithRoles = new List<ApplicationUser>();
 			foreach (var user in users)
@@ -34,5 +35,30 @@ namespace DataAccessLayer.Repositories
 
 			return usersWithRoles;
 		}
+
+		public async Task<ApplicationUser?> UpdateStatusEmployee(Guid userId, int status)
+		{
+			var roles = new List<string> { "Staff", "Employee" };
+			var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+			if (user == null) return null;
+			var userRoles = await _userManager.GetRolesAsync(user);
+			if (userRoles.Intersect(roles).Any())
+			{
+				if (status == 1)
+				{
+					user.Status = UserStatus.active.ToString();
+					await _userManager.UpdateAsync(user);
+				}
+				else if(status == 0)
+				{
+					user.Status = UserStatus.suspended.ToString();
+					await _userManager.UpdateAsync(user);
+				}
+				return user;
+			}
+
+			return null;
+		}
 	}
 }
+
