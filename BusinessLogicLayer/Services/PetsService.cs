@@ -58,8 +58,7 @@ public class PetsService(IPetsRepository petsRepository, IApplicationUsersReposi
 
     public async Task<PetResponse?> UpdatePet(PetUpdateRequest petUpdateRequest)
     {
-        petUpdateRequest.PetOwnerID = Guid.Parse("fdb1c124-5416-4ce2-9f11-4af81d4963b8");
-        ApplicationUser? applicationUser = await _applicationUsers.GetPetOwnerByIdAsync(petUpdateRequest.PetOwnerID);
+        ApplicationUser? applicationUser = await _applicationUsers.GetPetOwnerByIdAsync(Guid.Parse("fdb1c124-5416-4ce2-9f11-4af81d4963b8"));
 
         if (applicationUser == null)
             return null;

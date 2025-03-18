@@ -1,4 +1,4 @@
-using DataAccessLayer.Context;
+﻿using DataAccessLayer.Context;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Extensions;
 using BusinessLogicLayer.Extensions;
@@ -20,6 +20,17 @@ builder.Services.AddDataAccessLayer(builder.Configuration);
 
 builder.Services.AddDbContext<FueverDbContext>(option =>
 option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Cấu hình CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigins", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000") 
+              .AllowAnyHeader() 
+              .AllowAnyMethod(); 
+    });
+});
 
 var app = builder.Build();
 
