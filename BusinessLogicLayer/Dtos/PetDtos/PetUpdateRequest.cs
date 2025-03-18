@@ -1,6 +1,4 @@
-﻿using DataAccessLayer.Entities.EntityEnums;
-
-namespace BusinessLogicLayer.Dtos.PetDtos;
+﻿namespace BusinessLogicLayer.Dtos.PetDtos;
 
 public class PetUpdateRequest
 {

@@ -5,7 +5,7 @@ using FUEverProject.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FueverProject.Controllers
+namespace FUEverProject.ApiControllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -14,21 +14,21 @@ namespace FueverProject.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ITokenService _tokenService;
 
-		public AuthController(UserManager<ApplicationUser> userManager, ITokenService tokenService)
-		{
-			_userManager = userManager;
-			_tokenService = tokenService;
-		}
+        public AuthController(UserManager<ApplicationUser> userManager, ITokenService tokenService)
+        {
+            _userManager = userManager;
+            _tokenService = tokenService;
+        }
 
-		[HttpPost]
+        [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestViewModel loginRequestViewModel)
         {
             var user = await _userManager.FindByEmailAsync(loginRequestViewModel.UserName);
-            if(user.Status != "active")
+            if (user.Status != "active")
             {
-				return BadRequest("User is not active");
-			}
+                return BadRequest("User is not active");
+            }
 
             if (user != null)
             {
@@ -36,16 +36,16 @@ namespace FueverProject.Controllers
 
                 if (checkPasswordResult)
                 {
-					var roles = await _userManager.GetRolesAsync(user);
-					var jwtToken = _tokenService.CreateJWTToken(user, roles.ToList());
+                    var roles = await _userManager.GetRolesAsync(user);
+                    var jwtToken = _tokenService.CreateJWTToken(user, roles.ToList());
 
-					// Tạo object response chứa cả thông tin user và roles
-					var response = new LoginRespondeViewModel
-					{
-						JwtToken = jwtToken,
-					};
-					return Ok(response);
-				}
+                    // Tạo object response chứa cả thông tin user và roles
+                    var response = new LoginRespondeViewModel
+                    {
+                        JwtToken = jwtToken,
+                    };
+                    return Ok(response);
+                }
             }
             return BadRequest("Username or password incorrect");
         }
@@ -64,17 +64,17 @@ namespace FueverProject.Controllers
             {
                 roles = new string[] { "PetOwner" };
             }
-			var identityUser = new ApplicationUser
-			{
-				Status = UserStatus.active.ToString(),
-				RegistrationDate = DateTime.Now,
-				Address = registerRequestViewModel.Address,
-				DateOfBirth = registerRequestViewModel.DateOfBirth,
-				PhoneNumber = registerRequestViewModel.Phone,
-				UserName = registerRequestViewModel.UserName,
-				ProfileImage = "default.jpg",
-				Email = registerRequestViewModel.Gmail
-			};
+            var identityUser = new ApplicationUser
+            {
+                Status = UserStatus.active.ToString(),
+                RegistrationDate = DateTime.Now,
+                Address = registerRequestViewModel.Address,
+                DateOfBirth = registerRequestViewModel.DateOfBirth,
+                PhoneNumber = registerRequestViewModel.Phone,
+                UserName = registerRequestViewModel.UserName,
+                ProfileImage = "default.jpg",
+                Email = registerRequestViewModel.Gmail
+            };
 
             var identityResult = await _userManager.CreateAsync(identityUser, registerRequestViewModel.Password);
 
@@ -89,5 +89,5 @@ namespace FueverProject.Controllers
             }
             return BadRequest("Something went wrong!");
         }
-	}
+    }
 }
