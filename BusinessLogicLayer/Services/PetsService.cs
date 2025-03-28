@@ -14,7 +14,6 @@ public class PetsService(IPetsRepository petsRepository, IApplicationUsersReposi
 
     public async Task<PetResponse?> AddPet(PetAddRequest petAddRequest)
     {
-        petAddRequest.PetOwnerID = Guid.Parse("fdb1c124-5416-4ce2-9f11-4af81d4963b8");
         ApplicationUser? applicationUser = await _applicationUsers.GetPetOwnerByIdAsync(petAddRequest.PetOwnerID);
 
         if (applicationUser == null)
@@ -57,7 +56,7 @@ public class PetsService(IPetsRepository petsRepository, IApplicationUsersReposi
 
     public async Task<PetResponse?> UpdatePet(PetUpdateRequest petUpdateRequest)
     {
-        ApplicationUser? applicationUser = await _applicationUsers.GetPetOwnerByIdAsync(Guid.Parse("81ae160b-7379-418a-90eb-cfc826fade73"));
+        ApplicationUser? applicationUser = await _applicationUsers.GetPetOwnerByIdAsync(petUpdateRequest.PetOwnerID);
 
         if (applicationUser == null)
             return null;
