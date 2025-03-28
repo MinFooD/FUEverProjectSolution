@@ -10,11 +10,11 @@ public class PetsRepository(FueverDbContext dbContext) : IPetsRepository
 {
     private readonly FueverDbContext _dbContext = dbContext;
 
-    public async Task<IEnumerable<Pet>> GetPets()
+    public async Task<IEnumerable<Pet>> GetPets(Guid userId)
     {
         return await _dbContext.Pets
             .Include(p => p.PetOwner)
-            .Include(p => p.Bookings)
+            .Include(p => p.Bookings).Where(x => x.PetOwnerID.Equals(userId))
             .ToListAsync();
     }
 

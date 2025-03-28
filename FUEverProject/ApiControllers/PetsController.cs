@@ -11,11 +11,11 @@ public class PetsController(IPetsService petsService) : ControllerBase
 {
     private readonly IPetsService _petsService = petsService;
 
-    //GET: /api/Pets
-    [HttpGet]
-    public async Task<IEnumerable<PetResponse?>> Get()
+	//GET: /api/Pets
+	[HttpGet("{userId}")]
+	public async Task<IEnumerable<PetResponse?>> Get([FromRoute] Guid userId)
     {
-        IEnumerable<PetResponse?> pets = await _petsService.GetPets();
+        IEnumerable<PetResponse?> pets = await _petsService.GetPets(userId);
         return pets;
     }
 

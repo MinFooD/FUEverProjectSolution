@@ -45,9 +45,9 @@ public class PetsService(IPetsRepository petsRepository, IApplicationUsersReposi
         return isDeleted;
     }
 
-    public async Task<IEnumerable<PetResponse?>> GetPets()
+    public async Task<IEnumerable<PetResponse?>> GetPets(Guid userId)
     {
-        IEnumerable<Pet?> pets = await _petsRepository.GetPets();
+        IEnumerable<Pet?> pets = await _petsRepository.GetPets(userId);
 
         IEnumerable<PetResponse?> petResponses = _mapper.Map<IEnumerable<PetResponse>>(pets);
 

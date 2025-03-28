@@ -12,7 +12,7 @@ public interface IPetsRepository
     /// Retrieves all pets asynchronously.
     /// </summary>
     /// <returns>Returns all pets from the table</returns>
-    Task<IEnumerable<Pet>> GetPets();
+    Task<IEnumerable<Pet>> GetPets(Guid userId);
 
     /// <summary>
     /// Retrieves a single pet based on the specified condition asynchronously.

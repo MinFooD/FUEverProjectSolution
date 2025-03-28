@@ -8,7 +8,7 @@ public interface IPetsService
     /// Retrieves the list of pets from the pets repository
     /// </summary>
     /// <returns>Returns list of PetResponse objects</returns>
-    Task<IEnumerable<PetResponse?>> GetPets();
+    Task<IEnumerable<PetResponse?>> GetPets(Guid userId);
 
     /// <summary>
     /// Adds (inserts) pet into the table using pets repository
