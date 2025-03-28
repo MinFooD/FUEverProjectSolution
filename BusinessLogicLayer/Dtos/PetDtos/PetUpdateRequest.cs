@@ -14,4 +14,6 @@ public class PetUpdateRequest
     public string? OtherRequest { get; set; }
     public string? HealthDetail { get; set; }
     public string? Image { get; set; }
+
+    public Guid PetOwnerID { get; set; }
 }
